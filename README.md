@@ -24,6 +24,20 @@
     * 以及spring的工厂加载机制 （springFactoryLoader 类）
     
     实现配置的自动化加载
+
+
+## 深度理解SpringApplication 
+    
+    ## springApplication 的准备阶段
+        配置 spring boot bean源   
+            1、被spring 模式注解标注的类， 
+            2、从xmL 上下文配置文件集合
+            通常被spring boot beandefinitionLoader读取，(prepareContext()方法中)并将配置源解析加载为bean 定义 
+        推断web应用类型和mainapplication 类
+        加载应用上下文初始器和应用事件监听器
+        
+    ## springApplication 的运行阶段
+            
  
  
  
