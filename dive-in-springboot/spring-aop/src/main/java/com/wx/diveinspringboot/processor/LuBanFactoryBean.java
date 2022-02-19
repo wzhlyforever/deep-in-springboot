@@ -1,7 +1,10 @@
 package com.wx.diveinspringboot.processor;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationHandler;
@@ -20,8 +23,16 @@ public class LuBanFactoryBean implements FactoryBean {
 
     private Class mapper;
 
+    private SqlSession sqlSession;
+
     public LuBanFactoryBean(Class mapper) {
         this.mapper = mapper;
+    }
+
+
+    @Autowired
+    public void setSqlSession(SqlSessionFactory sqlSessionFactory){
+        this.sqlSession = sqlSessionFactory.openSession();
     }
 
     @Override

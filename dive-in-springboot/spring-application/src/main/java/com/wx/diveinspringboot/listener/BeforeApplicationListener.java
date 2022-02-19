@@ -6,6 +6,9 @@ import org.springframework.boot.context.event.ApplicationPreparedEvent;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.SmartApplicationListener;
 import org.springframework.core.Ordered;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 
 /**
  * @program: deep-in-springboot
@@ -34,10 +37,11 @@ public class BeforeApplicationListener implements SmartApplicationListener, Orde
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
         if (event instanceof ApplicationEnvironmentPreparedEvent) {
-
-            if (event instanceof ApplicationPreparedEvent) {
-            }
+            ApplicationEnvironmentPreparedEvent preparedEvent = (ApplicationEnvironmentPreparedEvent) event;
+            Environment environment = preparedEvent.getEnvironment();
+            System.out.println("environment.getProperty(\"name\") : " + environment.getProperty("name") );
         }
+
     }
 
 

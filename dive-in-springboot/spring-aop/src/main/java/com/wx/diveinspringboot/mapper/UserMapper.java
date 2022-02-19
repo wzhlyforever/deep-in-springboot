@@ -1,10 +1,9 @@
 package com.wx.diveinspringboot.mapper;
 
 
-import org.apache.ibatis.annotations.Select;
+import com.wx.diveinspringboot.entity.User;
 
 public interface UserMapper {
 
-    @Select(value = "select user")
-    String selectById(Integer id);
+    User selectById(int id);
 }

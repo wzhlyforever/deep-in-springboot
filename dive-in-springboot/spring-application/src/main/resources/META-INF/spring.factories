@@ -1,2 +1,9 @@
+org.springframework.context.ApplicationContextInitializer=\
+com.wx.diveinspringboot.context.AfterHelloWorldApplicationContextInitilizer,\
+com.wx.diveinspringboot.context.HelloWorldApplicationContextInitilizer
+  
+
+
 org.springframework.boot.SpringApplicationRunListener=\
-  com.wx.diveinspringboot.run.HelloWorldRunListener
+com.wx.diveinspringboot.run.HelloWorldRunListener,\
+com.wx.diveinspringboot.listener.BeforeApplicationListener
