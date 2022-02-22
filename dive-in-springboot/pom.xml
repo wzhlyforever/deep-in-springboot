@@ -8,6 +8,7 @@
         <module>spring-aop</module>
       <module>spring-security/spring-security01</module>
       <module>spring-security/security-session</module>
+      <module>spring-security/oauth2-dmeo</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
