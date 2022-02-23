@@ -10,7 +10,8 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>oauth2-dmeo</artifactId>
+  <artifactId>jwt-demo</artifactId>
+
 
   <dependencies>
 
@@ -19,38 +20,32 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!--<dependency>-->
-    <!--<groupId>org.springframework.cloud</groupId>-->
-    <!--<artifactId>spring-cloud-starter-oauth2</artifactId>-->
-    <!--</dependency>-->
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.springframework.security.oauth</groupId>
-      <artifactId>spring-security-oauth2</artifactId>
-      <version>2.3.4.RELEASE</version>
-    </dependency>
-
-
-    <!-- redis -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-redis</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-pool2</artifactId>
-    </dependency>
-
+    <!-- Spring Security和JWT整合 -->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-jwt</artifactId>
       <version>1.0.10.RELEASE</version>
     </dependency>
+
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.71</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.4</version>
+    </dependency>
+
 
     <!--JWT依赖-->
     <dependency>
@@ -58,15 +53,6 @@
       <artifactId>jjwt</artifactId>
       <version>0.9.1</version>
     </dependency>
-
-
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
-
 
 </project>

@@ -1,7 +1,11 @@
 package com.wx.oauth2demo.config;
 
+import com.wx.oauth2demo.enhancer.JwtTokenEnhancer;
 import com.wx.oauth2demo.service.UserService;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +18,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
@@ -47,6 +55,18 @@ public class OAuth2ServerConfig {
         @Autowired
         private RedisTokenStore redisTokenStore;
 
+        @Autowired
+        @Qualifier("jwtTokenStore")
+        private JwtTokenStore jwtTokenStore;
+
+        @Autowired
+        private JwtAccessTokenConverter jwtAccessTokenConverter;
+
+        @Autowired
+        private JwtTokenEnhancer jwtTokenEnhancer;
+
+
+
         // 配置OAuth2的客户端相关信息
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -65,8 +85,19 @@ public class OAuth2ServerConfig {
         // 包括配置身份认证器，配置认证方式，TokenStore，TokenGranter，OAuth2RequestFactory
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+
+            TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+            List<TokenEnhancer> degalates = new ArrayList<>();
+
+            degalates.add(jwtTokenEnhancer);
+            degalates.add(jwtAccessTokenConverter);
+
+            tokenEnhancerChain.setTokenEnhancers(degalates);;
+
             endpoints.authenticationManager(authenticationManager)
-                    .tokenStore(redisTokenStore) // 将指定token 存储到redis里
+                    //.tokenStore(redisTokenStore) // 将指定token 存储到redis里
+                    .tokenStore(jwtTokenStore)
+                    .tokenEnhancer(tokenEnhancerChain)
                     .reuseRefreshTokens(false)   // 是否重复使用refresh_token
                     .userDetailsService(userService)
                     .allowedTokenEndpointRequestMethods(HttpMethod.GET,HttpMethod.POST);

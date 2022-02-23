@@ -9,6 +9,7 @@
       <module>spring-security/spring-security01</module>
       <module>spring-security/security-session</module>
       <module>spring-security/oauth2-dmeo</module>
+      <module>spring-security/jwt-demo</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
